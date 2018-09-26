@@ -33,8 +33,9 @@ r = praw.Reddit(client_id=client_id,
 
 def list_all_downloaded_files(folder):
     file_list = []
-    for file in os.listdir(folder):
-        file_list.append(os.path.join(folder, file))
+    for f in os.listdir(folder):
+        if not f.startswith('.'):
+            file_list.append(os.path.join(folder, f))
     return file_list
 
 
@@ -44,11 +45,11 @@ def main():
 
     downloaded_files = list_all_downloaded_files(destination_folder)
 
-    gdrive = GoogleUploader()
-    gdrive.upload(downloaded_files)
-
-    gmail = GoogleMail(username_gmail, password_gmail, recipient, subject_gmail, len(downloaded_files))
-    gmail.send_email()
+    if downloaded_files:
+        gdrive = GoogleUploader()
+        gdrive.upload(downloaded_files)
+        gmail = GoogleMail(username_gmail, password_gmail, recipient, subject_gmail, len(downloaded_files))
+        gmail.send_email()
 
 
 schedule.every().day.at(schedule_time).do(main)
