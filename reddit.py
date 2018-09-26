@@ -57,6 +57,6 @@ while True:
     schedule.run_pending()
     time.sleep(1)
 
-print "****************"
-print "***   DONE   ***"
-print "****************"
+print("****************")
+print("***   DONE   ***")
+print("****************")

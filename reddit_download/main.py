@@ -24,14 +24,14 @@ class RedditDownloader:
                 downloaded_post = youtube_download(post.url)
             if not downloaded_post:
                 self.r.submission(id=post.id).hide()
-                print post.id + " has been moved to hidden\n"
+                print(post.id + " has been moved to hidden\n")
             self.r.submission(id=post.id).unsave()
-            print post.id + " has been unsaved\n"
+            print(post.id + " has been unsaved\n")
 
     @staticmethod
     def get_image(title, url, directory):
         image = wget.download(url, directory)
-        print "\nImage: " + title + " has been downloaded successfully\n"
+        print("\nImage: " + title + " has been downloaded successfully\n")
         return image
 
     @staticmethod

@@ -31,6 +31,6 @@ class GoogleUploader:
             }
             res = self.DRIVE.files().create(body=metadata, media_body=file, fields='id').execute()
             if res:
-                print formattedFilename + " has been uploaded!\n"
+                print(formattedFilename + " has been uploaded!\n")
                 os.remove(file)
-                print formattedFilename + " has been deleted in local folder\n"
+                print(formattedFilename + " has been deleted in local folder\n")

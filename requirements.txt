@@ -1,0 +1,6 @@
+schedule==0.5.0
+httplib2==0.10.3
+wget==3.2
+praw==5.3.0
+google_api_python_client==1.7.4
+youtube_dl==2018.9.26

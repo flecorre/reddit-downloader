@@ -19,10 +19,10 @@ success = False
 def my_hook(d):
     global success
     if d['status'] == 'finished':
-        print '\nVideo: ' + d['filename'] + " has been downloaded!\n"
+        print('\nVideo: ' + d['filename'] + " has been downloaded!\n")
         success = True
     if d['status'] == 'downloading':
-        print d['filename'], d['_percent_str'], d['_eta_str']
+        print(d['filename'], d['_percent_str'], d['_eta_str'])
 
 
 ytdl_opts = {
