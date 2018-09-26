@@ -1,7 +1,7 @@
 import wget
 import praw
 from configuration.constants import destination_folder
-from youtube import youtube_download
+from reddit_download.youtube import youtube_download
 
 
 class RedditDownloader:

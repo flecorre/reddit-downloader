@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import mimetypes
 from googleapiclient.discovery import build
