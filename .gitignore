@@ -1,0 +1,5 @@
+*.pyc
+token.json
+.idea/
+configuration/constants.py
+configuration/credentials.json
