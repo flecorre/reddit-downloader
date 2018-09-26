@@ -6,15 +6,14 @@ class GoogleMail:
     password = None
     recipient = None
     subject = None
-    number_of_files = None
-    body = '%s new files from reddit' % number_of_files
+    body = None
 
     def __init__(self, user, password, recipient, subject, number_of_files):
         self.user = user
         self.password = password
         self.recipient = recipient
         self.subject = subject
-        self.number_of_files = number_of_files
+        self.body = '%s new files from reddit' % number_of_files
 
     def send_email(self):
         gmail_user = self.user

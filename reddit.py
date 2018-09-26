@@ -6,7 +6,6 @@ Created on Sunday September 23 2018
 """
 
 import os
-import praw
 import schedule
 import time
 from configuration.constants import client_id
@@ -23,12 +22,6 @@ from configuration.constants import schedule_time
 from reddit_download.main import RedditDownloader
 from google_upload.main import GoogleUploader
 from gmail.main import GoogleMail
-
-r = praw.Reddit(client_id=client_id,
-                client_secret=client_secret,
-                password=password_reddit,
-                user_agent=user_agent,
-                username=username_reddit)
 
 
 def list_all_downloaded_files(folder):
