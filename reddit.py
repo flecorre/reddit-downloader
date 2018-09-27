@@ -27,9 +27,14 @@ from gmail.main import GoogleMail
 def list_all_downloaded_files(folder):
     file_list = []
     for f in os.listdir(folder):
-        if not f.startswith('.'):
+        if not f.startswith('.') or not f.endswith('.part'):
             file_list.append(os.path.join(folder, f))
     return file_list
+
+
+def clean_folder(folder):
+    for f in os.listdir(folder):
+        os.remove(f)
 
 
 def main():
@@ -43,6 +48,7 @@ def main():
         gdrive.upload(downloaded_files)
         gmail = GoogleMail(username_gmail, password_gmail, recipient, subject_gmail, len(downloaded_files))
         gmail.send_email()
+        clean_folder(destination_folder)
 
 
 schedule.every().day.at(schedule_time).do(main)
