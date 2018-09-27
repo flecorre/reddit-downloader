@@ -21,7 +21,7 @@ class RedditDownloader:
             if post.url.endswith(('.jpg', '.png', '.jpeg', '.tif', '.tiff', '.bmp')):
                 downloaded_post = self.get_image(post.title, post.url, destination_folder)
             else:
-                downloaded_post = youtube_download(post.url)
+                downloaded_post = self.get_video(post.url)
             if not downloaded_post:
                 self.r.submission(id=post.id).hide()
                 print(post.id + " has been moved to hidden\n")
