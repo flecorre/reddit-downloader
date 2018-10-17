@@ -5,7 +5,7 @@ import mimetypes
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
-from configuration.constants import credentials
+from configuration.constants import gdrive_api_credentials
 from configuration.constants import gdrive_folder_id
 
 
@@ -18,7 +18,7 @@ class GoogleUploader:
         store = file.Storage('token.json')
         creds = store.get()
         if not creds or creds.invalid:
-            flow = client.flow_from_clientsecrets(credentials, SCOPES)
+            flow = client.flow_from_clientsecrets(gdrive_api_credentials, SCOPES)
             creds = tools.run_flow(flow, store)
         self.DRIVE = build('drive', 'v3', http=creds.authorize(Http()))
 

@@ -2,27 +2,23 @@
 # SET REDDIT CREDENTIALS
 # =============================================================================
 
-client_id = ''
-client_secret = ''
-password_reddit = ''
-user_agent = ''
-username_reddit = ''
+reddit_client_id = ''
+reddit_client_secret = ''
+reddit_password = ''
+reddit_user_agent = ''
+reddit_username = ''
 
 # =============================================================================
-# SET EMAIL CREDENTIALS
+# SET TELEGRAM CREDENTIALS
 # =============================================================================
 
-username_gmail = ''
-password_gmail = ''
-recipient = ''
-subject_gmail = 'Reddit bot'
+telegram_token = ''
+telegram_chatid = 
 
 # =============================================================================
 # MISC
 # =============================================================================
 
-credentials = 'configuration/credentials.json'
-destination_folder = ''
+gdrive_api_credentials = 'configuration/credentials.json'
+destination_folder = './downloads'
 gdrive_folder_id = ''
-schedule_time = '22:00'
-
