@@ -12,12 +12,23 @@
 - Enter google api credentials in configuration/credentials.json
 - The first time you start the script a token.json will be generated
 
-#### Setup google mail
-- Create a dummy email account
-- Authorize less secure apps to access your gmail account: https://myaccount.google.com/lesssecureapps
-- Enter gmail credentials and recipient in configuration/constants.py
+#### Setup telegram api
+- Install telegram app on your smartphone
+- Open a chatroom with the telegram BotFather and get your Telegram token by typing:
+```shell
+/newbot
+```
+- Start a conversation with the bot typing:
+```shell
+/start
+test
+```
+then follow this link to get your chat id:
+```shell
+https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id
+```
 
 #### Getting started
-- pip install praw/youtube-dl/smtplib
-- Enter download temporary folder and gdrive folder in configuration/constants.py
+- pip install -r requirements.txt
+- Enter all the previous credentials and other stuff in configuration/constants.py
 - Enjoy

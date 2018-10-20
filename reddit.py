@@ -21,30 +21,38 @@ import logging
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+                    level=logging.ERROR)
 
 logger = logging.getLogger(__name__)
 
 
-def list_all_downloaded_files(folder):
-        filelist = os.listdir(folder)
-        return [x for x in filelist
-                if not (x.startswith('.') or not (x.endswith('.part')))]
+def list_files(path):
+    return [f for f in os.listdir(path) if not f.startswith('.') and not f.endswith('.part')]
+
+
+def append_folder_path(folder, list):
+    new_list = []
+    for element in list:
+        new_list.append(folder + '/' + element)
+    return new_list
 
 
 def clean_folder(folder):
     for f in os.listdir(folder):
-        os.remove(f)
+        if not f.startswith('.'):
+            os.remove(f)
+
 
 def fetch_reddit():
-        reddit = RedditDownloader(reddit_client_id, reddit_client_secret, reddit_password, reddit_user_agent, reddit_username)
-        reddit.download()
+    reddit = RedditDownloader(reddit_client_id, reddit_client_secret, reddit_password, reddit_user_agent,
+                              reddit_username)
+    reddit.download()
 
 
 def upload_gdrive(downloaded_files):
-        gdrive = GoogleUploader()
-        gdrive.upload(downloaded_files)
-        clean_folder(destination_folder)
+    gdrive = GoogleUploader()
+    gdrive.upload(downloaded_files)
+    clean_folder(destination_folder)
 
 
 def error(bot, update, error):
@@ -53,22 +61,23 @@ def error(bot, update, error):
 
 
 def start(bot, update):
-        bot.send_message(telegram_chatid, text='...starting to fetch')  
-        fetch_reddit()
-        downloaded_files = list_all_downloaded_files(destination_folder)
-        if downloaded_files:
-                sentence = "%s files fetched" % (len(downloaded_files))
-                bot.send_message(telegram_chatid, text=sentence)
-                upload_gdrive(downloaded_files)
-                bot.send_message(telegram_chatid, text='...all done!')
-        else:
-                bot.send_message(telegram_chatid, text='...nothing found')
+    bot.send_message(telegram_chatid, text='...starting to fetch')
+    fetch_reddit()
+    downloaded_files_relative_path = list_files(destination_folder)
+    if downloaded_files_relative_path:
+        downloaded_files_abs_path = append_folder_path(destination_folder, downloaded_files_relative_path)
+        sentence = "%s files fetched" % (len(downloaded_files_abs_path))
+        bot.send_message(telegram_chatid, text=sentence)
+        upload_gdrive(downloaded_files_abs_path)
+        bot.send_message(telegram_chatid, text='...all done!')
+    else:
+        bot.send_message(telegram_chatid, text='...nothing found')
 
 
 def main():
     print('Reddit bot starting...')
     # Create the EventHandler and pass it your bot's token.
-    
+
     updater = Updater(telegram_token)
 
     # Get the dispatcher to register handlers

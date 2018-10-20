@@ -1,6 +1,5 @@
-FROM python:3.5-alpine
+FROM python:2.7
 WORKDIR /app
 COPY . /app
-RUN pip3 install --upgrade oauth2client
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 CMD ["python", "./reddit.py"]

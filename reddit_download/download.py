@@ -28,6 +28,7 @@ class RedditDownloader:
             self.r.submission(id=post.id).unsave()
             print(post.id + " has been unsaved\n")
 
+
     @staticmethod
     def get_image(title, url, directory):
         image = wget.download(url, directory)
