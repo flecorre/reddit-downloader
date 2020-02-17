@@ -2,6 +2,7 @@
 
 import os
 import mimetypes
+import logging
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
@@ -33,6 +34,6 @@ class GoogleUploader:
             }
             res = self.DRIVE.files().create(body=metadata, media_body=file, fields='id').execute()
             if res:
-                print(formattedFilename + " has been uploaded!\n")
+                logging.info(f'{formattedFilename} has been uploaded')
                 os.remove(file)
-                print(formattedFilename + " has been deleted in local folder\n")
+                logging.info(f'{formattedFilename} has been deleted in local folder')

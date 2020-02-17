@@ -7,7 +7,7 @@ class MyLogger(object):
         pass
 
     def warning(self, msg):
-        pass
+        print(msg)
 
     def error(self, msg):
         print(msg)
@@ -37,4 +37,11 @@ def youtube_download(url):
     global success
     with youtube_dl.YoutubeDL(ytdl_opts) as ytdl:
         ytdl.download([url])
-        return success
+        download_status = success
+        reset_success_value()
+        return download_status
+
+
+def reset_success_value():
+    global success
+    success = False

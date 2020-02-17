@@ -6,6 +6,7 @@ Created on Sunday September 23 2018
 """
 
 import os
+import logging.handlers
 from configuration.constants import reddit_client_id
 from configuration.constants import reddit_client_secret
 from configuration.constants import reddit_password
@@ -16,14 +17,14 @@ from configuration.constants import telegram_token
 from configuration.constants import telegram_chatid
 from reddit_download.download import RedditDownloader
 from google_upload.upload import GoogleUploader
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import logging
+from telegram.ext import Updater, CommandHandler
 
-# Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.ERROR)
-
-logger = logging.getLogger(__name__)
+formatter = logging.Formatter(logging.BASIC_FORMAT)
+handler = logging.FileHandler("./reddit.log", mode="w", encoding='UTF-8', delay=False)
+handler.setFormatter(formatter)
+logger = logging.getLogger()
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 
 def list_files(path):
@@ -56,7 +57,6 @@ def upload_gdrive(downloaded_files):
 
 
 def error(bot, update, error):
-    """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, error)
 
 
@@ -75,23 +75,17 @@ def start(bot, update):
 
 
 def main():
-    print('Reddit bot starting...')
+    logger.info('Reddit bot is starting...')
     # Create the EventHandler and pass it your bot's token.
-
     updater = Updater(telegram_token)
-
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
-
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
-
     # log all errors
     dp.add_error_handler(error)
-
     # Start the Bot
     updater.start_polling()
-
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.

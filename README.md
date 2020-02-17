@@ -9,8 +9,9 @@
 
 #### Register google api
 - Follow that link: https://developers.google.com/drive/api/v3/quickstart/python
-- Enter google api credentials in configuration/credentials.json
+- Download credentials.json and replace the one in configuration/
 - The first time you start the script a token.json will be generated
+- Do not forget to enter google folder id in configuration/constants.py
 
 #### Setup telegram api
 - Install telegram app on your smartphone
@@ -21,7 +22,6 @@
 - Start a conversation with the bot typing:
 ```shell
 /start
-test
 ```
 then follow this link to get your chat id:
 ```shell

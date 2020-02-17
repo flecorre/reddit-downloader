@@ -1,5 +1,6 @@
 import wget
 import praw
+import logging
 from configuration.constants import destination_folder
 from reddit_download.youtube import youtube_download
 
@@ -17,22 +18,22 @@ class RedditDownloader:
         self.save_list = self.r.user.me().saved(limit=None)
 
     def download(self):
+        logging.info('Iterating through saved posts...')
         for post in self.save_list:
             if post.url.endswith(('.jpg', '.png', '.jpeg', '.tif', '.tiff', '.bmp')):
-                downloaded_post = self.get_image(post.title, post.url, destination_folder)
+                is_downloaded = self.get_image(post.url, destination_folder)
             else:
-                downloaded_post = self.get_video(post.url)
-            if not downloaded_post:
+                is_downloaded = self.get_video(post.url)
+            if is_downloaded:
                 self.r.submission(id=post.id).hide()
-                print(post.id + " has been moved to hidden\n")
-            self.r.submission(id=post.id).unsave()
-            print(post.id + " has been unsaved\n")
-
+                self.r.submission(id=post.id).unsave()
+                logging.info(f'{post.title} has been downloaded and moved to hidden posts')
+            else:
+                logging.warning(f'{post.title} cannot be downloaded')
 
     @staticmethod
-    def get_image(title, url, directory):
+    def get_image(url, directory):
         image = wget.download(url, directory)
-        print("\nImage: " + title + " has been downloaded successfully\n")
         return image
 
     @staticmethod
