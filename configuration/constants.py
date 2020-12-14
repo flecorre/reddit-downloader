@@ -9,16 +9,9 @@ reddit_user_agent = ''
 reddit_username = ''
 
 # =============================================================================
-# SET TELEGRAM CREDENTIALS
-# =============================================================================
-
-telegram_token = ''
-telegram_chatid = 
-
-# =============================================================================
 # MISC
 # =============================================================================
 
-gdrive_api_credentials = 'configuration/credentials.json'
+gdrive_api_credentials = ''
 destination_folder = './downloads'
 gdrive_folder_id = ''

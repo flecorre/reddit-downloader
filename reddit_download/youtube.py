@@ -1,8 +1,8 @@
 import youtube_dl
-from configuration.constants import destination_folder
+from configuration import constants
 
 
-class MyLogger(object):
+class YoutubeDLLogger(object):
     def debug(self, msg):
         pass
 
@@ -26,8 +26,8 @@ def my_hook(d):
 
 
 ytdl_opts = {
-    'logger': MyLogger(),
-    'outtmpl': destination_folder + '/%(title)s.%(ext)s',
+    'logger': YoutubeDLLogger(),
+    'outtmpl': constants.destination_folder + '/%(title)s.%(ext)s',
     'progress_hooks': [my_hook],
     'ignoreerrors': 'True'
 }
