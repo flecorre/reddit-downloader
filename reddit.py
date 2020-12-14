@@ -10,7 +10,6 @@ import logging.handlers
 from configuration import constants
 from reddit_download.download import RedditDownloader
 from google_upload.upload import GoogleUploader
-from telegram.ext import Updater, CommandHandler
 
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s", "%Y-%m-%d %H:%M:%S")
 handler = logging.StreamHandler()
